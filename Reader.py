@@ -1,12 +1,7 @@
 # Reader class
 class Reader:
 
-    # setting up class variables 
-    count = 0
-    channel = 0
-    readFilePath, writeFilePath = ''
-
-    def _init_(self,readFilePath,writeFilePath) -> None:
+    def __init__(self,readFilePath,writeFilePath) -> None:
         '''
         Constructor for Reader class
         '''
@@ -14,7 +9,7 @@ class Reader:
             self.readFilePath = readFilePath
             self.readWriteFile = writeFilePath
         except Exception as e:
-            print(e+" in Reader Contructor")
+            print(e," in Reader Contructor")
         finally:
             pass
 
@@ -34,4 +29,4 @@ class Reader:
                     line = readFile.readline()
                 self.count = temp
         except Exception as e:
-            print(e+" in readWriteFile()")
+            print(e," in readWriteFile()")
