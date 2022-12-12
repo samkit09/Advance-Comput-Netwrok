@@ -1,2 +1,4 @@
 *.txt
 *.pyz
+
+__pycache__
