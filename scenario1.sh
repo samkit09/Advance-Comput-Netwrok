@@ -1,3 +1,3 @@
 #!/bin/bash
-java Controller 100
-java Node 0 100 -1
+# python3 Controller.py 100 &
+python3 Node.py 0 100 -1
