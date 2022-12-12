@@ -1,7 +1,7 @@
 class Writer:
 	def __init__(self, writeFilePath: str):
 		try:
-			self.writeFilePath = writeFilePath;
+			self.writeFilePath = writeFilePath
 			self.count = 0
 		except Exception as e:
 			print(e, "in Writer")
