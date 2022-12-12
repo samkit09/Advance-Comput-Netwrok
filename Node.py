@@ -18,13 +18,13 @@ class Node:
 
 			for i in range(self.duration):
 				if i % 5 == 0:
-					self.hello();
+					self.hello()
 				if i % 10 == 0:
 					pass
 				if i % 15 == 0:
 					pass
-				self.read.readWriteFile();
-				sleep(1);
+				self.read.readWriteFile()
+				sleep(1)
 		except Exception as e:
 			print(e+ " in Node")
 	
