@@ -36,14 +36,16 @@ class Controller:
                     line = readFile.readline()
                 self.nodes = set(temp)
                 self.n_channels = len(self.channels)
-            self.in_tree = InTree(self.channels)
+            self.in_tree = InTree()
+            self.in_tree.createInTree(self.channels,self.nodes)
             self.topology = self.in_tree.return_topo()
-            print(self.topology)
         except Exception as e:
             print(e, "\nTopology file empty or file not available.")
 
-        # Block to check transmit messages
+        # Block to check for messages and transfer it
         for i in range(self.duration):
+            print(
+                f"----------------------- Counter ({i})--------------------------")
             files = os.listdir(self.files_path)
             files = [i for i in files if i.startswith('output')]
             for out_file in files:
@@ -52,8 +54,15 @@ class Controller:
                 for n in outgoing_n:
                     inp = 'input_'+str(n)+'.txt'
                     self.read.readWriteFile(inp, out_file)
+					
+
+            # waiting for 1 second before next iteration
             sleep(1)
+
+        # Treminating the program
         print('End!')
+        sleep(5)
+        exit()
 
 
 if __name__ == '__main__':

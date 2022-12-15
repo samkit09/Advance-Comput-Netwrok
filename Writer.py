@@ -6,10 +6,14 @@ class Writer:
         self.writeFilePath = os.getcwd()+'/files/'+writeFilePath
         self.count = 0
 
-    def writeFile(self, message: str):
+    def writeFile(self, message: str, path=None):
+        if path != None:
+            p = os.getcwd()+'/files/'+path
+        else:
+            p = self.writeFilePath
         try:
-            with open(self.writeFilePath, mode='a+') as writeFile:
-                writeFile.write(message + '\n')
+            with open(p, mode='a+') as writeFile:
+                writeFile.write(message +'\n')
                 self.count += 1
         except Exception as e:
             print(e, " in writerFile")
