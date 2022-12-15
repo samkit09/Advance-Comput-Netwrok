@@ -59,10 +59,10 @@ class Node:
                         self.received(m)
                         from_to = re.findall(r'\d+', m)
                         from_to = [int(i) for i in from_to]
-                        print(from_to)
+                        # print(from_to)
                         if from_to[1] != self.id and flag == 0:
                             for id, neighbor in self.in_tree.items():
-                                print(neighbor)
+                                # print(neighbor)
                                 if self.id in neighbor:
                                     self.write.writeFile(m, self.outputFile)
                                     break
@@ -71,9 +71,8 @@ class Node:
                 # Waiting for 1 second before next iteration
                 sleep(1)
 
-            print("Known Neighbour: ", 'ID = ',
-                  self.id, 'N = ', self.known_neigh)
-            print(self.in_tree)
+            # print("Known Neighbour: ", 'ID = ',self.id, 'N = ', self.known_neigh)
+            print("Intree of ", self.id, ' =', dict(self.in_tree))
             # Treminating the program
             exit()
 

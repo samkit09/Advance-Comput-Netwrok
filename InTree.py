@@ -35,8 +35,8 @@ class InTree:
         for channel in channels:
             self.addEdge(channel[0], channel[1])
         print('\nGraph = ', self.graph)
-        print('InTree = ', self.T)
-        print(self.nodes)
+        # print('InTree = ', self.T)
+        # print(self.nodes)
 
     def updateInTree(self, id, intree):
         # tempintree = defaultdict(list)
