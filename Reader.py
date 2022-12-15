@@ -43,13 +43,15 @@ class Reader:
         inpf = os.getcwd()+'/files/'+input_file
         try:
             temp = 0
-            moder = 'a+' if os.path.exists(inpf) else 'r'
-            modew = 'a+'
+            moder = 'a+' if not os.path.exists(outf) else 'r'
+            modew = 'a'
             with open(outf, moder) as readFile:
                 line = readFile.readline().strip()
+                # print(input_file, ' - ', line)
                 while line:
                     temp += 1
-                    if temp > self.count_o: # revert indent below 2 lines
+                    # print(outf, ' - ', self.count_o)
+                    if temp > self.count_o:
                         with open(inpf, modew) as writeFile:
                             writeFile.write(line+'\n')
                     line = readFile.readline().strip()

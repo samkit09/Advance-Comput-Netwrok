@@ -1,11 +1,12 @@
 from collections import defaultdict
+import re
 
 
 class InTree:
     def __init__(self):
-        self.root = id
         self.graph = defaultdict(list)
         self.T = defaultdict(list)
+        self.nodes = list()
 
     def addEdge(self, from_node, to_node):
         # append the neighbor node to its corresponding key node
@@ -37,10 +38,26 @@ class InTree:
         print('InTree = ', self.T)
         print(self.nodes)
 
-    def updateInTree(self, intree):
-        print("Updating - ", intree)
-        tempintree = defaultdict(list)
-        pass
+    def updateInTree(self, id, intree):
+        # tempintree = defaultdict(list)
+        edges = re.findall(r'\d+', intree)
+        edges = edges[1:]
+        edges = [(int(edges[i]), int(edges[i+1]))
+                 for i in range(0, len(edges), 2)]
+
+        # print("Updating - ", edges)
+
+        for i in edges:
+            if i[1] not in self.T[i[0]]:
+                self.T[i[0]].append(i[1])
+
+            # for j in self.T.keys():
+            #     print(i, 'edges[i] - ', edges[i], 'SElf.T 1-', self.T[j])
+            #     print(True if edges[i] in self.T[j] else False)
+            #     if edges[i] in self.T[j] and edges[i+1] not in self.T:
+            #         print('SElf.T 2-', self.T[j])
+            #         self.T[j].append(edges[i+1])
+        # print(self.T)
 
     def return_in_tree(self):
         return self.T

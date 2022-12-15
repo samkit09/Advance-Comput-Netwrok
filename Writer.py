@@ -13,7 +13,8 @@ class Writer:
             p = self.writeFilePath
         try:
             with open(p, mode='a+') as writeFile:
-                writeFile.write(message +'\n')
+                writeFile.write(message + '\n')
                 self.count += 1
+            writeFile.close()
         except Exception as e:
             print(e, " in writerFile")

@@ -18,7 +18,7 @@ class Controller:
         self.n_channels = 0
         self.nodes = set()
 
-        self.read = Reader()
+        self.read = list()
 
         # to check and create directory to store text files
         if not os.path.exists('files'):
@@ -35,10 +35,12 @@ class Controller:
                     temp += [int(i) for i in line.strip().split(' ')]
                     line = readFile.readline()
                 self.nodes = set(temp)
+                self.read = [dict() for i in range(len(self.nodes))]
                 self.n_channels = len(self.channels)
             self.in_tree = InTree()
-            self.in_tree.createInTree(self.channels,self.nodes)
+            self.in_tree.createInTree(self.channels, self.nodes)
             self.topology = self.in_tree.return_topo()
+
         except Exception as e:
             print(e, "\nTopology file empty or file not available.")
 
@@ -46,22 +48,24 @@ class Controller:
         for i in range(self.duration):
             print(
                 f"----------------------- Counter ({i})--------------------------")
+
             files = os.listdir(self.files_path)
             files = [i for i in files if i.startswith('output')]
-            for out_file in files:
+            for out_file in files:  # runs for number of nodes
                 temp = out_file.split('.')
-                outgoing_n = self.topology[int(temp[0][-1])]
-                for n in outgoing_n:
+                temp = int(temp[0][-1])
+                outgoing_n = self.topology[temp]
+                for n in outgoing_n:  # runs for number of outgoing neighbor
                     inp = 'input_'+str(n)+'.txt'
-                    self.read.readWriteFile(inp, out_file)
-					
+                    self.read[temp][n] = self.read[temp].get(n, Reader())
+                    self.read[temp][n].readWriteFile(inp, out_file)
 
             # waiting for 1 second before next iteration
             sleep(1)
 
         # Treminating the program
         print('End!')
-        sleep(5)
+        sleep(1)
         exit()
 
 
