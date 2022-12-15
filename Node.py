@@ -1,5 +1,6 @@
 from time import sleep
 import sys
+import re
 import traceback
 from Reader import Reader
 from Writer import Writer
@@ -42,7 +43,6 @@ class Node:
                 # Reading: Reading message from input file
                 msgs = self.read.readFile(self.inputFile)
                 for m in msgs:
-
                     # when received hello message append to known neighbor and update intree
                     if m[:5] == "Hello":
                         t = int(m.strip()[-1])
@@ -55,11 +55,22 @@ class Node:
                         # print("User", self.id, ' - ', self.in_tree)
 
                     else:
+                        flag = 0
                         self.received(m)
-                        # print(f"New message for {self.id} from", m)
+                        from_to = re.findall(r'\d+', m)
+                        from_to = [int(i) for i in from_to]
+                        print(from_to)
+                        if from_to[1] != self.id and flag == 0:
+                            for id, neighbor in self.in_tree.items():
+                                print(neighbor)
+                                if self.id in neighbor:
+                                    self.write.writeFile(m, self.outputFile)
+                                    break
+                                    flag = 1
 
                 # Waiting for 1 second before next iteration
                 sleep(1)
+
             print("Known Neighbour: ", 'ID = ',
                   self.id, 'N = ', self.known_neigh)
             print(self.in_tree)
@@ -85,9 +96,6 @@ class Node:
                     s += f'({id} {j})'
         # print('Printing s - ', s)
         self.write.writeFile(s)
-
-    # def in_tree(self):
-    # 	pass
 
     def received(self, m):
         self.write.writeFile(m, self.receivedFile)
