@@ -2,8 +2,6 @@
 
 CS 6390 Fall 2022 Programming Project
 
-Excecuted the program on sxs220101@net09.utdallas.edu
-
 This project is built on Python3.6
 
 ## Steps to execute ->
@@ -26,5 +24,3 @@ These files will be automatically cleaned/reset when you run any of the scenario
 So you do not have to delete them manually.
 
 _Note_ - _Be sure to check_ the output before you run other `scenario.sh` file as it will be _earsed_.
-
-Thank you.
